@@ -153,6 +153,7 @@ const Tours = () => {
       toursAvailable: 30,
       category: 'luxury'
     }
+    
   ];
 
   const categories = [
