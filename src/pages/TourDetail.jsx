@@ -1,4 +1,4 @@
-// src/pages/TourDetail.jsx - FULLY FIXED VERSION
+// src/pages/TourDetail.jsx 
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { 
