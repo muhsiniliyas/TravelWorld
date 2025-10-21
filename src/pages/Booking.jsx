@@ -1,4 +1,4 @@
-// src/pages/Booking.jsx - COMPLETE WITH SIDEBAR AND RUPEE SYMBOL
+// src/pages/Booking.jsx 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { 
