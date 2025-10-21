@@ -1,4 +1,4 @@
-// src/components/Hero/HeroSection.jsx - CLEAN VERSION (NO FLOATING ICONS)
+// src/components/Hero/HeroSection.jsx 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 

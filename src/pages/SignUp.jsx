@@ -1,7 +1,7 @@
 // src/pages/SignUp.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext'; // Fixed: context (singular)
+import { useAuth } from '../contexts/AuthContext'; 
 import { Mail, Lock, User, Eye, EyeOff, Plane, CheckCircle, AlertCircle } from 'lucide-react';
 
 const SignUp = () => {

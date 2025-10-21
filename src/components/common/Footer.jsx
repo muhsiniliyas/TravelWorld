@@ -1,4 +1,4 @@
-// src/components/common/Footer.jsx - WITH LIGHT/DARK THEME SUPPORT
+// src/components/common/Footer.jsx 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 

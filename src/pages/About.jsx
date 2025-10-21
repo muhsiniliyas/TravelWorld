@@ -1,4 +1,4 @@
-// src/pages/About.jsx - CLEAN VERSION (NO ANIMATED BLOBS)
+// src/pages/About.jsx 
 import React from 'react';
 import { 
   Target, 

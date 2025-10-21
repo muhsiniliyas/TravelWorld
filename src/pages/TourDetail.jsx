@@ -1,4 +1,4 @@
-// src/pages/TourDetail.jsx - FULLY FIXED VERSION
+// src/pages/TourDetail.jsx 
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { 
@@ -241,7 +241,7 @@ const TourDetail = () => {
         'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop',
         'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800&h=600&fit=crop',
         'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1519512191-e9d0a7f89b49?w=800&h=600&fit=crop'
+        'https://images.unsplash.com/photo-1623009070764-45002990256e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHBhcmlzJTIwc3RyZWV0fGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400'
       ],
       highlights: [
         'Eiffel Tower priority access',
@@ -654,16 +654,16 @@ const TourDetail = () => {
       icon: Phone,
       title: 'Call Us',
       description: 'Speak with our travel experts',
-      action: 'tel:+919876543210',
-      value: '+91 98765 43210',
+      action: 'tel:+91',
+      value: '+91',
       color: 'from-green-500 to-emerald-600'
     },
     {
       icon: Mail,
       title: 'Email Us',
       description: 'Send us your questions',
-      action: 'mailto:info@travelworld.com',
-      value: 'info@travelworld.com',
+      action: 'mailto:',
+      value: '',
       color: 'from-blue-500 to-cyan-600'
     },
     {
@@ -895,11 +895,11 @@ const TourDetail = () => {
               <div className="space-y-4 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-400">
                   <Phone className="w-5 h-5" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 </span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-400">
                   <Mail className="w-5 h-5" />
-                  <span>info@travelworld.com</span>
+                  <span></span>
                 </div>
               </div>
             </div>
