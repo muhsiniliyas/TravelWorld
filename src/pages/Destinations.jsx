@@ -1,6 +1,6 @@
 // src/pages/Destinations.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Add this import
+import { Link } from 'react-router-dom'; 
 import { Search, MapPin, Star, ArrowRight, Calendar, Globe, TrendingUp, Filter } from 'lucide-react';
 
 const Destinations = () => {
