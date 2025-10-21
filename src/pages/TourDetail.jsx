@@ -895,11 +895,11 @@ const TourDetail = () => {
               <div className="space-y-4 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-400">
                   <Phone className="w-5 h-5" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 </span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-400">
                   <Mail className="w-5 h-5" />
-                  <span>info@travelworld.com</span>
+                  <span></span>
                 </div>
               </div>
             </div>
