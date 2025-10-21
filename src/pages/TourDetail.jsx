@@ -654,16 +654,16 @@ const TourDetail = () => {
       icon: Phone,
       title: 'Call Us',
       description: 'Speak with our travel experts',
-      action: 'tel:+919876543210',
-      value: '+91 98765 43210',
+      action: 'tel:+91',
+      value: '+91',
       color: 'from-green-500 to-emerald-600'
     },
     {
       icon: Mail,
       title: 'Email Us',
       description: 'Send us your questions',
-      action: 'mailto:info@travelworld.com',
-      value: 'info@travelworld.com',
+      action: 'mailto:',
+      value: '',
       color: 'from-blue-500 to-cyan-600'
     },
     {
