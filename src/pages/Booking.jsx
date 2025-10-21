@@ -538,21 +538,441 @@ const Booking = () => {
                   </div>
                 )}
 
-                {/* Step 2: Travel Details - (Continue with your existing Step 2 code) */}
-                {currentStep === 2 && (
-                  <div className="space-y-4 sm:space-y-6 animate-fade-in">
-                    {/* Your existing Step 2 code... */}
-                  </div>
-                )}
+{/* Step 2: Travel Details */}
+{currentStep === 2 && (
+  <div className="space-y-4 sm:space-y-6 animate-fade-in">
+    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 flex items-center space-x-2">
+      <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-teal-500" />
+      <span>Travel Details</span>
+    </h2>
 
-                {/* Step 3: Payment - (Continue with your existing Step 3 code) */}
-                {currentStep === 3 && (
-                  <div className="space-y-4 sm:space-y-6 animate-fade-in">
-                    {/* Your existing Step 3 code... */}
-                  </div>
-                )}
+    {/* Check-in & Check-out Dates */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Check-in Date *
+        </label>
+        <div className="relative">
+          <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
+          <input
+            type="date"
+            value={formData.checkIn}
+            onChange={(e) => handleInputChange('checkIn', e.target.value)}
+            min={today}
+            className={`w-full pl-11 pr-4 py-2.5 sm:py-3 border-2 ${
+              errors.checkIn ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'
+            } rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm sm:text-base`}
+          />
+        </div>
+        {errors.checkIn && (
+          <p className="mt-1 text-xs text-red-500 flex items-center space-x-1">
+            <AlertCircle className="w-3 h-3" />
+            <span>{errors.checkIn}</span>
+          </p>
+        )}
+      </div>
 
-                {/* Navigation Buttons */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Check-out Date *
+        </label>
+        <div className="relative">
+          <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
+          <input
+            type="date"
+            value={formData.checkOut}
+            onChange={(e) => handleInputChange('checkOut', e.target.value)}
+            min={formData.checkIn || today}
+            className={`w-full pl-11 pr-4 py-2.5 sm:py-3 border-2 ${
+              errors.checkOut ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'
+            } rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm sm:text-base`}
+          />
+        </div>
+        {errors.checkOut && (
+          <p className="mt-1 text-xs text-red-500 flex items-center space-x-1">
+            <AlertCircle className="w-3 h-3" />
+            <span>{errors.checkOut}</span>
+          </p>
+        )}
+      </div>
+    </div>
+
+    {/* Number of Travelers */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Adults *
+        </label>
+        <div className="flex items-center space-x-3">
+          <button
+            type="button"
+            onClick={() => handleInputChange('adults', Math.max(1, formData.adults - 1))}
+            className="w-10 h-10 flex items-center justify-center bg-gray-200 dark:bg-gray-700 hover:bg-teal-500 dark:hover:bg-teal-600 text-gray-900 dark:text-white hover:text-white rounded-lg transition-all font-bold"
+          >
+            -
+          </button>
+          <div className="flex-1 text-center">
+            <div className="flex items-center justify-center space-x-2">
+              <Users className="w-5 h-5 text-gray-400" />
+              <span className="text-xl font-bold text-gray-900 dark:text-white">{formData.adults}</span>
+            </div>
+            <span className="text-xs text-gray-500 dark:text-gray-400">Adults (18+)</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => handleInputChange('adults', Math.min(10, formData.adults + 1))}
+            className="w-10 h-10 flex items-center justify-center bg-gray-200 dark:bg-gray-700 hover:bg-teal-500 dark:hover:bg-teal-600 text-gray-900 dark:text-white hover:text-white rounded-lg transition-all font-bold"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Children
+        </label>
+        <div className="flex items-center space-x-3">
+          <button
+            type="button"
+            onClick={() => handleInputChange('children', Math.max(0, formData.children - 1))}
+            className="w-10 h-10 flex items-center justify-center bg-gray-200 dark:bg-gray-700 hover:bg-teal-500 dark:hover:bg-teal-600 text-gray-900 dark:text-white hover:text-white rounded-lg transition-all font-bold"
+          >
+            -
+          </button>
+          <div className="flex-1 text-center">
+            <div className="flex items-center justify-center space-x-2">
+              <Users className="w-5 h-5 text-gray-400" />
+              <span className="text-xl font-bold text-gray-900 dark:text-white">{formData.children}</span>
+            </div>
+            <span className="text-xs text-gray-500 dark:text-gray-400">Children (0-17)</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => handleInputChange('children', Math.min(5, formData.children + 1))}
+            className="w-10 h-10 flex items-center justify-center bg-gray-200 dark:bg-gray-700 hover:bg-teal-500 dark:hover:bg-teal-600 text-gray-900 dark:text-white hover:text-white rounded-lg transition-all font-bold"
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {/* Room Type */}
+    <div>
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+        Room Type
+      </label>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <button
+          type="button"
+          onClick={() => handleInputChange('roomType', 'standard')}
+          className={`relative p-4 rounded-lg border-2 transition-all text-left ${
+            formData.roomType === 'standard'
+              ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/20'
+              : 'border-gray-200 dark:border-gray-700 hover:border-teal-300'
+          }`}
+        >
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center space-x-2">
+              <Hotel className="w-5 h-5 text-teal-500" />
+              <span className="font-semibold text-gray-900 dark:text-white">Standard</span>
+            </div>
+            {formData.roomType === 'standard' && (
+              <CheckCircle className="w-5 h-5 text-teal-500" />
+            )}
+          </div>
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Comfortable room with basic amenities</p>
+          <p className="text-sm font-bold text-gray-900 dark:text-white mt-2">Base price included</p>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => handleInputChange('roomType', 'deluxe')}
+          className={`relative p-4 rounded-lg border-2 transition-all text-left ${
+            formData.roomType === 'deluxe'
+              ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/20'
+              : 'border-gray-200 dark:border-gray-700 hover:border-teal-300'
+          }`}
+        >
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center space-x-2">
+              <Award className="w-5 h-5 text-purple-500" />
+              <span className="font-semibold text-gray-900 dark:text-white">Deluxe</span>
+            </div>
+            {formData.roomType === 'deluxe' && (
+              <CheckCircle className="w-5 h-5 text-teal-500" />
+            )}
+          </div>
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Luxury room with premium amenities</p>
+          <p className="text-sm font-bold text-purple-600 dark:text-purple-400 mt-2">+₹200/night</p>
+        </button>
+      </div>
+    </div>
+
+    {/* Emergency Contact */}
+    <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+      <div className="flex items-start space-x-2 mb-3">
+        <AlertCircle className="w-5 h-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+        <div>
+          <h4 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">Emergency Contact Information</h4>
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">
+            Please provide emergency contact details for safety purposes
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Contact Name
+          </label>
+          <input
+            type="text"
+            value={formData.emergencyContact}
+            onChange={(e) => handleInputChange('emergencyContact', e.target.value)}
+            placeholder={placeholders.emergencyContact}
+            className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm sm:text-base"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Contact Phone
+          </label>
+          <input
+            type="tel"
+            value={formData.emergencyPhone}
+            onChange={(e) => handleInputChange('emergencyPhone', e.target.value)}
+            placeholder={placeholders.emergencyPhone}
+            maxLength="10"
+            className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm sm:text-base"
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Special Requests */}
+    <div>
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        Special Requests (Optional)
+      </label>
+      <textarea
+        value={formData.specialRequests}
+        onChange={(e) => handleInputChange('specialRequests', e.target.value)}
+        rows="4"
+        placeholder="Any special requirements, dietary restrictions, or accessibility needs..."
+        className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none text-sm sm:text-base"
+      ></textarea>
+      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+        Maximum 500 characters
+      </p>
+    </div>
+  </div>
+)}
+
+{/* Step 3: Payment */}
+{currentStep === 3 && (
+  <div className="space-y-4 sm:space-y-6 animate-fade-in">
+    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 flex items-center space-x-2">
+      <CreditCard className="w-5 h-5 sm:w-6 sm:h-6 text-teal-500" />
+      <span>Payment Information</span>
+    </h2>
+
+    {/* Security Notice */}
+    <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+      <div className="flex items-start space-x-2">
+        <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+        <div>
+          <h4 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">Secure Payment</h4>
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">
+            Your payment information is encrypted and secure. We never store your card details.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Card Number */}
+    <div>
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        Card Number *
+      </label>
+      <div className="relative">
+        <CreditCard className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+        <input
+          type="text"
+          value={formData.cardNumber}
+          onChange={(e) => handleInputChange('cardNumber', e.target.value)}
+          placeholder={placeholders.cardNumber}
+          maxLength="19"
+          className={`w-full pl-11 pr-4 py-2.5 sm:py-3 border-2 ${
+            errors.cardNumber ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'
+          } rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm sm:text-base tracking-wider`}
+        />
+        {/* Card Brand Icons */}
+        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex space-x-1">
+          <div className="w-8 h-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded text-white text-[8px] font-bold flex items-center justify-center">VISA</div>
+          <div className="w-8 h-5 bg-gradient-to-r from-red-600 to-orange-600 rounded flex items-center justify-center">
+            <div className="w-3 h-3 bg-red-500 rounded-full opacity-80"></div>
+          </div>
+        </div>
+      </div>
+      {errors.cardNumber && (
+        <p className="mt-1 text-xs text-red-500 flex items-center space-x-1">
+          <AlertCircle className="w-3 h-3" />
+          <span>{errors.cardNumber}</span>
+        </p>
+      )}
+    </div>
+
+    {/* Cardholder Name */}
+    <div>
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        Cardholder Name *
+      </label>
+      <div className="relative">
+        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+        <input
+          type="text"
+          value={formData.cardholderName}
+          onChange={(e) => handleInputChange('cardholderName', e.target.value.toUpperCase())}
+          placeholder={placeholders.cardholderName}
+          className={`w-full pl-11 pr-4 py-2.5 sm:py-3 border-2 ${
+            errors.cardholderName ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'
+          } rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm sm:text-base uppercase`}
+        />
+      </div>
+      {errors.cardholderName && (
+        <p className="mt-1 text-xs text-red-500 flex items-center space-x-1">
+          <AlertCircle className="w-3 h-3" />
+          <span>{errors.cardholderName}</span>
+        </p>
+      )}
+    </div>
+
+    {/* Expiry Date & CVV */}
+    <div className="grid grid-cols-2 gap-4 sm:gap-6">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Expiry Date *
+        </label>
+        <div className="relative">
+          <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <input
+            type="text"
+            value={formData.expiryDate}
+            onChange={(e) => handleInputChange('expiryDate', e.target.value)}
+            placeholder={placeholders.expiryDate}
+            maxLength="5"
+            className={`w-full pl-11 pr-4 py-2.5 sm:py-3 border-2 ${
+              errors.expiryDate ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'
+            } rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm sm:text-base tracking-wider`}
+          />
+        </div>
+        {errors.expiryDate && (
+          <p className="mt-1 text-xs text-red-500 flex items-center space-x-1">
+            <AlertCircle className="w-3 h-3" />
+            <span>{errors.expiryDate}</span>
+          </p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          CVV *
+        </label>
+        <div className="relative">
+          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <input
+            type="password"
+            value={formData.cvv}
+            onChange={(e) => handleInputChange('cvv', e.target.value)}
+            placeholder={placeholders.cvv}
+            maxLength="3"
+            className={`w-full pl-11 pr-4 py-2.5 sm:py-3 border-2 ${
+              errors.cvv ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'
+            } rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm sm:text-base tracking-widest`}
+          />
+          <Info className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 cursor-help" title="3-digit security code on back of card" />
+        </div>
+        {errors.cvv && (
+          <p className="mt-1 text-xs text-red-500 flex items-center space-x-1">
+            <AlertCircle className="w-3 h-3" />
+            <span>{errors.cvv}</span>
+          </p>
+        )}
+      </div>
+    </div>
+
+    {/* Order Summary */}
+    <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-lg p-4 sm:p-6">
+      <h4 className="font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center space-x-2">
+        <DollarSign className="w-5 h-5 text-teal-500" />
+        <span>Payment Summary</span>
+      </h4>
+
+      <div className="space-y-2 sm:space-y-3">
+        <div className="flex justify-between text-sm sm:text-base">
+          <span className="text-gray-600 dark:text-gray-300">Tour Package</span>
+          <span className="font-medium text-gray-900 dark:text-white">₹{totalPrice.toFixed(2)}</span>
+        </div>
+        <div className="flex justify-between text-sm sm:text-base">
+          <span className="text-gray-600 dark:text-gray-300">Taxes & Fees (18%)</span>
+          <span className="font-medium text-gray-900 dark:text-white">₹{tax.toFixed(2)}</span>
+        </div>
+        <div className="border-t-2 border-gray-300 dark:border-gray-500 pt-2 sm:pt-3 flex justify-between items-center">
+          <span className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">Total Amount</span>
+          <span className="text-xl sm:text-2xl font-bold text-teal-600 dark:text-teal-400">₹{finalTotal.toFixed(2)}</span>
+        </div>
+      </div>
+    </div>
+
+    {/* Terms & Conditions */}
+    <div className="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-4">
+      <label className="flex items-start cursor-pointer group">
+        <input
+          type="checkbox"
+          checked={formData.agreeToTerms}
+          onChange={(e) => handleInputChange('agreeToTerms', e.target.checked)}
+          className="mt-1 w-5 h-5 text-teal-600 border-gray-300 rounded focus:ring-2 focus:ring-teal-500 cursor-pointer"
+        />
+        <span className="ml-3 text-sm text-gray-700 dark:text-gray-300">
+          I agree to the{' '}
+          <a href="/terms" className="text-teal-600 dark:text-teal-400 hover:underline font-semibold">
+            Terms & Conditions
+          </a>
+          {' '}and{' '}
+          <a href="/privacy" className="text-teal-600 dark:text-teal-400 hover:underline font-semibold">
+            Privacy Policy
+          </a>
+          . I authorize TravelWorld to charge my card for this booking.
+        </span>
+      </label>
+      {errors.agreeToTerms && (
+        <p className="mt-2 text-xs text-red-500 flex items-center space-x-1 ml-8">
+          <AlertCircle className="w-3 h-3" />
+          <span>{errors.agreeToTerms}</span>
+        </p>
+      )}
+    </div>
+
+    {/* Final Notice */}
+    <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+      <div className="flex items-start space-x-2">
+        <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+        <div>
+          <h4 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">
+            You're almost there!
+          </h4>
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">
+            Complete your payment to confirm your booking. A confirmation email will be sent to {formData.email || 'your email'}.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+               {/* Navigation Buttons */}
                 <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200 dark:border-gray-700">
                   {currentStep > 1 && (
                     <button
