@@ -241,7 +241,7 @@ const TourDetail = () => {
         'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop',
         'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800&h=600&fit=crop',
         'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1519512191-e9d0a7f89b49?w=800&h=600&fit=crop'
+        'https://images.unsplash.com/photo-1623009070764-45002990256e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHBhcmlzJTIwc3RyZWV0fGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=400'
       ],
       highlights: [
         'Eiffel Tower priority access',
